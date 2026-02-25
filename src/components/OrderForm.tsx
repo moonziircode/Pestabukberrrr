@@ -4,8 +4,6 @@ import { supabase } from '../lib/supabase';
 import {
   ChevronDown,
   ChevronUp,
-  Minus,
-  Plus,
   ShoppingBag,
   Loader2,
   CheckCircle2,
@@ -168,20 +166,20 @@ export function OrderForm({ onSuccess }: OrderFormProps) {
   if (isSuccess) {
     return (
       <div className="flex flex-col items-center justify-center py-16 px-6 text-center">
-        <CheckCircle2 className="w-24 h-24 text-emerald-500 mb-6" />
-        <h2 className="text-3xl font-bold text-slate-800 mb-3">
+        <CheckCircle2 className="w-20 h-20 text-gray-900 mb-6" />
+        <h2 className="text-2xl font-bold text-gray-900 mb-3">
           Pesanan Tercatat! 🎉
         </h2>
-        <p className="text-slate-600 mb-2">
-          Terima kasih <span className="font-bold text-amber-600">{name}</span>,
+        <p className="text-gray-600 mb-2">
+          Terima kasih <span className="font-bold text-gray-900">{name}</span>,
           pesanan kamu udah aman tercatat!
         </p>
-        <p className="text-slate-500 text-sm mb-8">
+        <p className="text-gray-500 text-sm mb-8">
           Tinggal tunggu tanggal mainnya aja. See you! 👋
         </p>
         <button
           onClick={handleReset}
-          className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-3 rounded-xl transition-all"
+          className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-md transition-all"
         >
           Pesan Lagi (Buat Temen)
         </button>
@@ -190,10 +188,10 @@ export function OrderForm({ onSuccess }: OrderFormProps) {
   }
 
   return (
-    <div className="pb-48">
+    <div className="pb-32">
       {/* Input Nama (RTL) */}
-      <div className="bg-white rounded-2xl p-6 mb-6 shadow-sm" dir="rtl">
-        <label className="block text-xl font-semibold text-slate-800 mb-3">
+      <div className="bg-white rounded-lg p-5 mb-4 border border-gray-200" dir="rtl">
+        <label className="block text-lg font-semibold text-gray-900 mb-2">
           مااسمك؟
         </label>
         <input
@@ -201,56 +199,56 @@ export function OrderForm({ onSuccess }: OrderFormProps) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Ketik nama kamu di sini..."
-          className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-amber-500 focus:outline-none transition-colors text-slate-800"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900 transition-colors text-gray-900"
         />
       </div>
 
       {/* Menu Categories (Accordion) */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {menuData.map((category) => {
           const isExpanded = expandedCategories.has(category.category);
           const itemCount = getCategoryItemCount(category.category);
 
           return (
-            <div key={category.category} className="bg-white rounded-2xl shadow-sm overflow-hidden">
+            <div key={category.category} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
               {/* Category Header */}
               <button
                 onClick={() => toggleCategory(category.category)}
-                className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors"
+                className="w-full px-5 py-3.5 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-lg font-bold text-slate-800">
+                <div className="flex items-center gap-2">
+                  <span className="text-base font-semibold text-gray-900">
                     {category.category}
                   </span>
                   {itemCount > 0 && (
-                    <span className="bg-amber-500 text-white text-sm font-bold px-2.5 py-0.5 rounded-full">
+                    <span className="bg-gray-900 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
                       {itemCount}
                     </span>
                   )}
                 </div>
                 {isExpanded ? (
-                  <ChevronUp className="w-5 h-5 text-slate-600" />
+                  <ChevronUp className="w-4 h-4 text-gray-600" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-600" />
+                  <ChevronDown className="w-4 h-4 text-gray-600" />
                 )}
               </button>
 
               {/* Category Items */}
               {isExpanded && (
-                <div className="border-t border-slate-100">
+                <div className="border-t border-gray-200">
                   {category.items.map((item) => {
                     const isSelected = !!orders[item.id];
 
                     return (
                       <div
                         key={item.id}
-                        className="px-6 py-4 flex items-center justify-between border-b border-slate-50 last:border-b-0"
+                        className="px-5 py-3.5 flex items-center justify-between border-b border-gray-100 last:border-b-0"
                       >
                         <div className="flex-1">
-                          <p className="font-semibold text-slate-800">
+                          <p className="font-medium text-gray-900 text-sm">
                             {item.name}
                           </p>
-                          <p className="text-sm text-amber-600 font-medium">
+                          <p className="text-xs text-gray-600 font-medium mt-0.5">
                             {formatRupiah(item.price)}
                           </p>
                         </div>
@@ -265,10 +263,10 @@ export function OrderForm({ onSuccess }: OrderFormProps) {
                               category.category
                             )
                           }
-                          className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                          className={`px-5 py-1.5 rounded-md text-sm font-semibold transition-all ${
                             isSelected
-                              ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
-                              : 'bg-amber-500 hover:bg-amber-600 text-white'
+                              ? 'bg-gray-900 hover:bg-gray-800 text-white'
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                           }`}
                         >
                           {isSelected ? '✓ Dipilih' : 'Pilih'}
@@ -285,25 +283,25 @@ export function OrderForm({ onSuccess }: OrderFormProps) {
 
       {/* Floating Summary (Cart) */}
       {hasOrders && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-2xl">
-          <div className="max-w-md mx-auto p-6">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+          <div className="max-w-md mx-auto p-4">
             {/* Toggle Detail Button */}
             <button
               onClick={() => setShowDetails(!showDetails)}
-              className="w-full text-sm text-amber-600 font-semibold mb-4 hover:text-amber-700 transition-colors"
+              className="w-full text-xs text-gray-600 font-medium mb-3 hover:text-gray-900 transition-colors"
             >
               {showDetails ? '▼ Sembunyikan Detail' : '▶ Lihat Detail Pesanan'}
             </button>
 
             {/* Detail Items */}
             {showDetails && (
-              <div className="mb-4 p-4 bg-slate-50 rounded-xl space-y-2">
+              <div className="mb-3 p-3 bg-gray-50 rounded-md space-y-1.5 max-h-32 overflow-y-auto">
                 {orderItems.map((item) => (
-                  <div key={item.id} className="flex justify-between text-sm">
-                    <span className="text-slate-700">
+                  <div key={item.id} className="flex justify-between text-xs">
+                    <span className="text-gray-700">
                       {item.quantity}x {item.name}
                     </span>
-                    <span className="font-semibold text-slate-800">
+                    <span className="font-semibold text-gray-900">
                       {formatRupiah(item.price * item.quantity)}
                     </span>
                   </div>
@@ -312,22 +310,22 @@ export function OrderForm({ onSuccess }: OrderFormProps) {
             )}
 
             {/* Summary */}
-            <div className="space-y-2 mb-4">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-600">Subtotal</span>
-                <span className="font-semibold text-slate-800">
+            <div className="space-y-1.5 mb-3">
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-600">Subtotal</span>
+                <span className="font-semibold text-gray-900">
                   {formatRupiah(calculateSubtotal())}
                 </span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-600">PPN (10%)</span>
-                <span className="font-semibold text-slate-800">
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-600">PPN (10%)</span>
+                <span className="font-semibold text-gray-900">
                   {formatRupiah(calculateTax())}
                 </span>
               </div>
-              <div className="flex justify-between text-lg border-t border-slate-200 pt-2">
-                <span className="font-bold text-slate-800">Total Bayar</span>
-                <span className="font-bold text-amber-600">
+              <div className="flex justify-between text-sm border-t border-gray-200 pt-2">
+                <span className="font-semibold text-gray-900">Total Bayar</span>
+                <span className="font-bold text-gray-900">
                   {formatRupiah(calculateTotal())}
                 </span>
               </div>
@@ -337,17 +335,17 @@ export function OrderForm({ onSuccess }: OrderFormProps) {
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-slate-300 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2"
+              className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-300 text-white font-semibold py-3 rounded-md transition-all flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Menyimpan...</span>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span className="text-sm">Menyimpan...</span>
                 </>
               ) : (
                 <>
-                  <ShoppingBag className="w-5 h-5" />
-                  <span>Kirim Pesanan</span>
+                  <ShoppingBag className="w-4 h-4" />
+                  <span className="text-sm">Kirim Pesanan</span>
                 </>
               )}
             </button>

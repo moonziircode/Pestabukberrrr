@@ -152,12 +152,12 @@ export function AdminRecap() {
   if (!isAuthenticated) {
     return (
       <div className="max-w-sm mx-auto mt-16">
-        <div className="bg-white rounded-2xl p-8 shadow-sm text-center">
-          <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Lock className="w-8 h-8 text-amber-600" />
+        <div className="bg-white rounded-lg p-8 border border-gray-200 text-center">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Lock className="w-8 h-8 text-gray-900" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">Area Admin</h2>
-          <p className="text-slate-600 text-sm mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Area Admin</h2>
+          <p className="text-gray-600 text-sm mb-6">
             Masukkan password untuk melihat rekap pesanan
           </p>
           <input
@@ -166,11 +166,11 @@ export function AdminRecap() {
             onChange={(e) => setPassword(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
             placeholder="Password..."
-            className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-amber-500 focus:outline-none transition-colors mb-4"
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:border-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900 transition-colors mb-4"
           />
           <button
             onClick={handleLogin}
-            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 rounded-md transition-colors flex items-center justify-center gap-2"
           >
             <ShieldCheck className="w-5 h-5" />
             <span>Masuk</span>
@@ -186,15 +186,15 @@ export function AdminRecap() {
   return (
     <div className="pb-8">
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 mb-6 shadow-sm">
+      <div className="bg-white rounded-lg p-6 mb-4 border border-gray-200">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-2xl font-bold text-slate-800">Dashboard Admin</h2>
-            <p className="text-slate-600 text-sm mt-1">
-              Total ada <span className="font-bold text-amber-600">{orders.length} orang</span> yang ikutan.
+            <h2 className="text-xl font-bold text-gray-900">Dashboard Admin</h2>
+            <p className="text-gray-600 text-sm mt-1">
+              Total ada <span className="font-bold text-gray-900">{orders.length} orang</span> yang ikutan.
             </p>
           </div>
-          {isLoading && <Loader2 className="w-6 h-6 text-amber-500 animate-spin" />}
+          {isLoading && <Loader2 className="w-6 h-6 text-gray-900 animate-spin" />}
         </div>
 
         {/* Action Buttons */}
@@ -202,17 +202,17 @@ export function AdminRecap() {
           <button
             onClick={handleCopyRecap}
             disabled={orders.length === 0 || isLoading}
-            className="flex-1 bg-emerald-500 hover:bg-emerald-600 disabled:bg-slate-300 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="flex-1 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-300 text-white font-semibold py-2.5 rounded-md transition-colors flex items-center justify-center gap-2 text-sm"
           >
-            <Download className="w-5 h-5" />
+            <Download className="w-4 h-4" />
             <span>Copy Rekap</span>
           </button>
           <button
             onClick={handleResetAll}
             disabled={orders.length === 0 || isLoading}
-            className="flex-1 bg-red-500 hover:bg-red-600 disabled:bg-slate-300 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="flex-1 bg-gray-100 hover:bg-gray-200 disabled:bg-gray-300 text-gray-900 font-semibold py-2.5 rounded-md transition-colors flex items-center justify-center gap-2 text-sm"
           >
-            <Trash2 className="w-5 h-5" />
+            <Trash2 className="w-4 h-4" />
             <span>Reset Semua</span>
           </button>
         </div>
@@ -220,71 +220,71 @@ export function AdminRecap() {
 
       {/* Orders Table */}
       {orders.length === 0 ? (
-        <div className="bg-white rounded-2xl p-12 text-center shadow-sm">
-          <p className="text-slate-500 text-lg">
+        <div className="bg-white rounded-lg p-12 text-center border border-gray-200">
+          <p className="text-gray-500 text-lg">
             Belum ada pesanan masuk nih. Sepi amat. 🥺
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200">
-                  <th className="px-6 py-4 text-left text-sm font-bold text-slate-800">
-                    Nama Pemesan
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="px-5 py-3 text-left text-xs font-bold text-gray-900 uppercase tracking-wider">
+                    Nama
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-slate-800">
-                    Detail Pesanan
+                  <th className="px-5 py-3 text-left text-xs font-bold text-gray-900 uppercase tracking-wider">
+                    Detail
                   </th>
-                  <th className="px-6 py-4 text-right text-sm font-bold text-slate-800">
-                    Total Bayar
+                  <th className="px-5 py-3 text-right text-xs font-bold text-gray-900 uppercase tracking-wider">
+                    Total
                   </th>
-                  <th className="px-6 py-4 text-center text-sm font-bold text-slate-800">
+                  <th className="px-5 py-3 text-center text-xs font-bold text-gray-900 uppercase tracking-wider">
                     Aksi
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {orders.map((order) => (
-                  <tr key={order.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4">
-                      <p className="font-semibold text-slate-800">{order.name}</p>
+                  <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                    <td className="px-5 py-3">
+                      <p className="font-semibold text-gray-900 text-sm">{order.name}</p>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="space-y-1">
+                    <td className="px-5 py-3">
+                      <div className="space-y-0.5">
                         {order.items.map((item, idx) => (
-                          <p key={idx} className="text-sm text-slate-600">
+                          <p key={idx} className="text-xs text-gray-600">
                             {item.quantity}x {item.name}
                           </p>
                         ))}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-right">
-                      <p className="font-bold text-amber-600">
+                    <td className="px-5 py-3 text-right">
+                      <p className="font-bold text-gray-900 text-sm">
                         {formatRupiah(order.total)}
                       </p>
-                      <p className="text-xs text-slate-500">Inc. Tax (10%)</p>
+                      <p className="text-xs text-gray-500">Inc. Tax (10%)</p>
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-5 py-3 text-center">
                       <button
                         onClick={() => order.id && handleDeleteOrder(order.id)}
                         disabled={isLoading}
-                        className="inline-flex items-center gap-1 px-3 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors disabled:opacity-50"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-900 rounded-md transition-colors disabled:opacity-50"
                       >
-                        <UserMinus className="w-4 h-4" />
-                        <span className="text-sm font-semibold">Hapus</span>
+                        <UserMinus className="w-3.5 h-3.5" />
+                        <span className="text-xs font-semibold">Hapus</span>
                       </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
-                <tr className="bg-amber-50 border-t-2 border-amber-200">
-                  <td colSpan={2} className="px-6 py-4 text-right font-bold text-slate-800">
+                <tr className="bg-gray-900 border-t-2 border-gray-900">
+                  <td colSpan={2} className="px-5 py-3 text-right font-bold text-white text-sm">
                     GRAND TOTAL:
                   </td>
-                  <td className="px-6 py-4 text-right font-bold text-2xl text-amber-600">
+                  <td className="px-5 py-3 text-right font-bold text-xl text-white">
                     {formatRupiah(grandTotal)}
                   </td>
                   <td></td>
